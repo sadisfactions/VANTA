@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#080a12">
+  <title>Панель управления</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="bg" aria-hidden="true"><div class="bg__glow"></div><div class="bg__grid"></div></div>
+
+  <div class="shell" id="shell" hidden>
+    <aside class="side" id="side" aria-label="Разделы панели">
+      <div class="side__brand">
+        <svg viewBox="0 0 40 40" width="26" height="26" aria-hidden="true">
+          <defs><linearGradient id="sm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6F9BFF"/><stop offset="1" stop-color="#AA7CFF"/></linearGradient></defs>
+          <path d="M20 1 C22 13 27 18 39 20 C27 22 22 27 20 39 C18 27 13 22 1 20 C13 18 18 13 20 1Z" fill="url(#sm)"/>
+        </svg>
+        <span class="side__name">Панель</span>
+      </div>
+      <nav class="side__nav" id="nav"></nav>
+      <div class="side__foot">
+        <a class="side__link" href="/" target="_blank" rel="noopener">Открыть сайт ↗</a>
+        <button type="button" class="side__link" id="logout">Выйти</button>
+      </div>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+
+    <div class="main">
+      <header class="topbar">
+        <button type="button" class="burger" id="burger" aria-label="Меню" aria-controls="side" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+        </button>
+        <div class="topbar__title">
+          <p class="eyebrow mono" id="crumb">Панель управления</p>
+          <h1 id="title">Обзор</h1>
+        </div>
+        <span class="chip" id="dirtyChip" hidden>Не сохранено</span>
+      </header>
+      <main id="view" class="view" tabindex="-1"></main>
+    </div>
+
+    <div class="savebar" id="savebar">
+      <p class="savebar__msg" id="saveMsg" role="status">Все изменения сохранены</p>
+      <button type="button" class="btn btn--ghost" id="previewBtn"><span>Предпросмотр</span></button>
+      <button type="button" class="btn btn--ghost" id="discardBtn" disabled><span>Отменить</span></button>
+      <button type="button" class="btn btn--primary" id="saveBtn" disabled><span>Сохранить</span></button>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <div class="modal" id="previewModal" hidden role="dialog" aria-modal="true" aria-label="Предпросмотр сайта">
+    <div class="modal__box">
+      <header class="modal__head">
+        <p class="modal__title">Предпросмотр — так сайт будет выглядеть после сохранения</p>
+        <div class="seg" id="devSeg">
+          <button type="button" data-dev="desktop" class="is-on">Компьютер</button>
+          <button type="button" data-dev="mobile">Телефон</button>
+        </div>
+        <button type="button" class="icon-btn" id="previewClose" aria-label="Закрыть">✕</button>
+      </header>
+      <div class="modal__stage" id="previewStage"><iframe id="previewFrame" title="Предпросмотр сайта"></iframe></div>
+    </div>
+  </div>
+
+  <div class="gate" id="gate">Загрузка…</div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

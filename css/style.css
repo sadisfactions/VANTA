@@ -211,6 +211,21 @@ ul{list-style:none}
 
 .about__text{font-size:14px;line-height:1.7;color:var(--mute);max-width:26em}
 
+/* временный статус, объявления, баннер и аватар (данные из админки) */
+.statusline{position:relative;padding-left:14px;font-size:14px;line-height:1.5;color:var(--text);max-width:30em}
+.statusline::before{content:"";position:absolute;left:0;top:.35em;bottom:.35em;width:2px;background:linear-gradient(180deg,var(--electric),var(--lilac))}
+.about__banner{height:64px;margin-bottom:14px;overflow:hidden;border:1px solid var(--line);-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.about__banner img{display:block;width:100%;height:100%;object-fit:cover}
+.about__avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid var(--line2);flex:none}
+.news__title{margin:16px 0 8px;color:var(--mute);font-size:10px;font-weight:500}
+.news{display:flex;flex-direction:column;gap:10px}
+.news__it{padding-left:12px;border-left:1px solid var(--line)}
+.news__it.is-pinned{border-left-color:var(--electric)}
+.news__meta{display:block;font-size:9.5px;color:var(--electric)}
+.news__it p{font-size:13px;line-height:1.5;color:var(--text)}
+.bg__img{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s var(--ease);
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.bg__img.is-on{opacity:.22}
 .foot{display:flex;justify-content:space-between;padding:clamp(10px,2vh,20px) 0 clamp(14px,2.6vh,26px);color:rgba(146,155,190,.85);font-size:11px}
 
 /* ---------- модальное окно ---------- */
@@ -287,6 +302,7 @@ a.row:hover,button.row:hover{padding-left:8px}
   .shard,.bead,.tag.is-live .dot,.live-dot{animation:none}
   .day:not(.is-off):hover{transform:none}
 }
+
 
 
 

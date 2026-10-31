@@ -18,6 +18,7 @@
   <a class="skip" href="#hero">К содержимому</a>
 
   <div class="bg" aria-hidden="true">
+    <div class="bg__img" id="bgImg"></div>
     <div class="bg__glow"></div>
     <div class="bg__grid"></div>
     <div class="bg__spot"></div>
@@ -43,6 +44,7 @@
         <p class="tag mono" id="tag" role="status" aria-live="polite" hidden><i class="dot" aria-hidden="true"></i><span id="tagPlatform"></span><span class="tag__sep" id="tagSep" aria-hidden="true"></span><span id="tagCategory"></span></p>
         <h1 class="nick"><span id="nick">VANTA</span></h1>
         <p class="desc" id="desc"></p>
+        <p class="statusline" id="statusText" hidden></p>
         <div class="cta" id="cta"></div>
       </section>
 
@@ -92,8 +94,10 @@
   </dialog>
 
   <script src="js/config.js"></script>
-  <script src="js/orb.js"></script>
-  <script src="js/main.js"></script>
+  <!-- settings.js получает настройки из админки (/api/settings), накладывает их на config.js и затем подключает orb.js и main.js -->
+  <script src="js/settings.js" data-boot></script>
 </body>
 </html>
+
+
 

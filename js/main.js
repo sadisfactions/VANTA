@@ -46,10 +46,18 @@
   /* ---------- бренд, ник, описание ---------- */
   var nick = C.nick || "";
   document.title = nick + " — стример";
-  $("#brandName").textContent = nick;
+  $("#brandName").textContent = C.displayName || nick;
   $("#nick").textContent = nick;
   $("#desc").innerHTML = esc(C.description || "").replace(/\n/g, "<br>");
   if (!C.description) $("#desc").hidden = true;
+  /* временный статус от владельца («Сегодня стрима не будет», «Скоро начинаем») */
+  if (C.statusText) { $("#statusText").textContent = C.statusText; $("#statusText").hidden = false; }
+  /* фоновое изображение из админки (допускаются только загрузки с этого же сайта) */
+  if (/^\/api\/media\/background\?v=\d+$/.test(C.background || "")) {
+    var bgi = $("#bgImg");
+    bgi.style.backgroundImage = "url(" + C.background + ")";
+    bgi.classList.add("is-on");
+  }
   $("#footLeft").textContent = nick + (C.footerLabel ? " / " + C.footerLabel : "");
   $("#footRight").textContent = "© " + new Date().getFullYear() + " " + nick;
 
@@ -125,7 +133,7 @@
       }).join("") + "</ul>";
     $("#schedule").hidden = false; blocks++;
   }
-  if (socials.length) {
+  if (socials.length && (C.sections || {}).socials !== false) {
     $("#links").innerHTML =
       '<h2 class="blk__title">' + icon("link") + "<span>" + esc(L.socialsTitle || "Соцсети") + "</span></h2>" +
       '<ul class="list">' + socials.map(function (s) {
@@ -133,13 +141,28 @@
       }).join("") + "</ul>";
     $("#links").hidden = false; blocks++;
   }
+  /* «О канале» + объявления + баннер и аватар (всё необязательно; колонка скрывается, если пусто) */
   var ab = C.about || {};
-  if (ab.enabled !== false && String(ab.text || "").trim()) {
-    $("#about").innerHTML = '<h2 class="blk__title"><span>' + esc(ab.title || "О канале") + "</span></h2>" +
-      '<p class="about__text">' + esc(String(ab.text).trim()).replace(/\n/g, "<br>") + "</p>";
+  var aboutText = ab.enabled !== false ? String(ab.text || "").trim() : "";
+  var mediaOk = function (u, slot) { return new RegExp("^/api/media/" + slot + "\\?v=\\d+$").test(u || ""); };
+  var newsItems = (C.news || []).slice(0, 3);
+  var banner = mediaOk(C.banner, "banner") ? C.banner : "", avatar = mediaOk(C.avatar, "avatar") ? C.avatar : "";
+  if (aboutText || newsItems.length) {
+    var fmtDate = function (d) { var p = String(d || "").split("-"); return p.length === 3 ? p[2] + "." + p[1] : ""; };
+    var ah = "";
+    if (banner) ah += '<div class="about__banner"><img src="' + esc(banner) + '" alt="" loading="lazy"></div>';
+    if (aboutText) {
+      ah += '<h2 class="blk__title">' + (avatar ? '<img class="about__avatar" src="' + esc(avatar) + '" alt="">' : "") + "<span>" + esc(ab.title || "О канале") + "</span></h2>" +
+        '<p class="about__text">' + esc(aboutText).replace(/\n/g, "<br>") + "</p>";
+    }
+    if (newsItems.length) {
+      ah += '<h3 class="news__title mono">' + esc(C.newsTitle || "Объявления") + "</h3><ul class=\"news\">" + newsItems.map(function (n) {
+        return '<li class="news__it' + (n.pinned ? " is-pinned" : "") + '"><span class="news__meta mono">' + (n.pinned ? "Закреплено" : esc(fmtDate(n.date))) + "</span><p>" + esc(n.text) + "</p></li>";
+      }).join("") + "</ul>";
+    }
+    $("#about").innerHTML = ah;
     $("#about").hidden = false; blocks++;
-  }
-  if (!blocks) { $("#info").hidden = true; document.body.classList.add("no-info"); }
+  }  if (!blocks) { $("#info").hidden = true; document.body.classList.add("no-info"); }
 
   /* ---------- статус эфира и текущая игра ---------- */
   var st = C.status || {};
@@ -302,6 +325,8 @@
     if (t.dataset.clip) return clip(+t.dataset.clip);
   });
 })();
+
+
 
 
 
