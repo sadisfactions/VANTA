@@ -166,7 +166,7 @@ ul{list-style:none}
 .day.is-plan{background:linear-gradient(170deg,rgba(70,93,255,.55),rgba(121,84,255,.26));box-shadow:inset 0 0 0 1px rgba(111,155,255,.65),0 0 18px rgba(70,93,255,.22)}
 .day.is-plan::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,var(--electric),var(--lilac))}
 .day.is-plan span{color:#fff;font-weight:600;text-shadow:0 0 14px rgba(111,155,255,.75)}
-.day.is-plan::after{content:"";position:absolute;top:9px;right:9px;width:7px;height:7px;border:1.5px solid var(--electric);border-radius:50%}
+.day.is-plan .day__tag::after{content:"";display:inline-block;width:5px;height:5px;margin-left:5px;border:1.5px solid var(--electric);border-radius:50%;vertical-align:middle}
 .day.is-plan small{color:var(--text)}
 
 /* E — сегодня выходной: спокойно, без признаков эфира */
@@ -181,6 +181,26 @@ ul{list-style:none}
 .day.is-today.is-live .day__tag{color:#fff;font-weight:600;font-size:9.5px;letter-spacing:.14em}
 .day.is-today.is-live span{color:#fff;font-weight:600}
 .day.is-today.is-live small{color:#fff;font-weight:600;font-size:10.5px;line-height:1.2;overflow-wrap:anywhere}
+/* ---- выразительная подсветка дней со стримом ---- */
+.day:not(.is-off){transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.day:not(.is-off):not(.is-today){background:radial-gradient(120% 70% at 50% 100%,rgba(121,84,255,.30),transparent 72%),linear-gradient(180deg,rgba(70,93,255,.16),rgba(121,84,255,.05))}
+/* тонкая светящаяся линия по нижнему краю */
+.day:not(.is-off)::after{content:"";position:absolute;left:14%;right:14%;bottom:0;height:2px;pointer-events:none;opacity:.8;
+  background:linear-gradient(90deg,transparent,var(--lilac),var(--electric),transparent);box-shadow:0 0 12px 1px rgba(111,155,255,.5);
+  transition:left .35s var(--ease),right .35s var(--ease),opacity .35s,box-shadow .35s}
+/* время отделено: линия под названием дня и мягкое свечение цифр */
+.day:not(.is-off) b{padding-bottom:6px;border-bottom:1px solid rgba(111,155,255,.22)}
+.day:not(.is-off):not(.is-plan) span{text-shadow:0 0 12px rgba(111,155,255,.5)}
+/* TODAY — небольшая метка-плашка */
+.day.is-today .day__tag{right:auto;padding:1px 5px;border:1px solid rgba(111,155,255,.5);background:rgba(70,93,255,.25);color:#fff;font-weight:500}
+.day.is-today.is-off .day__tag{border-color:rgba(146,155,190,.35);background:rgba(146,155,190,.1);color:var(--mute)}
+.day.is-today.is-live .day__tag{border-color:transparent;background:none;padding:0}
+.day.is-today.is-live::after{left:6%;right:6%;opacity:1;background:linear-gradient(90deg,transparent,#fff,var(--electric),transparent)}
+@media (hover:hover){
+  .day:not(.is-off):hover{transform:translateY(-3px);z-index:2}
+  .day:not(.is-off):not(.is-today):hover{box-shadow:inset 0 1px 0 rgba(111,155,255,.55),0 8px 24px -6px rgba(70,93,255,.55)}
+  .day:not(.is-off):hover::after{left:6%;right:6%;opacity:1;box-shadow:0 0 18px 2px rgba(111,155,255,.8)}
+}
 .list{display:flex;flex-direction:column}
 .list a{display:flex;align-items:center;gap:16px;padding:clamp(5px,.9vh,9px) 0;font-size:13.5px;color:var(--text);transition:color .3s,padding .35s var(--ease)}
 .list a svg:first-child{color:var(--electric);flex:none}
@@ -265,7 +285,10 @@ a.row:hover,button.row:hover{padding-left:8px}
   *,*::before,*::after{animation-duration:.001s!important;animation-delay:0s!important;transition-duration:.001s!important}
   .rv{opacity:1;transform:none}
   .shard,.bead,.tag.is-live .dot,.live-dot{animation:none}
+  .day:not(.is-off):hover{transform:none}
 }
+
+
 
 
 

@@ -164,7 +164,7 @@
       el.classList.toggle("is-next", next);
       if (isToday) el.setAttribute("aria-current", "date"); else el.removeAttribute("aria-current");
       if (on) tag.innerHTML = '<i class="live-dot"></i>LIVE';
-      else if (isToday) tag.textContent = "Сегодня";
+      else if (isToday) tag.textContent = "Today";
       else if (next) tag.textContent = "Следующий эфир";
       else tag.textContent = "";
       var label = on ? "идёт эфир" + (game ? ": " + game : "") : plan ? "сегодня запланирован эфир" : isToday ? "сегодня выходной" : next ? "следующий эфир" : "";
@@ -302,6 +302,7 @@
     if (t.dataset.clip) return clip(+t.dataset.clip);
   });
 })();
+
 
 
 
