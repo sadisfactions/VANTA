@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VANTA — стример</title>
+  <meta name="description" content="VANTA — стример. Трансляции, клипы и сообщество.">
+  <meta name="theme-color" content="#080a12">
+  <meta property="og:title" content="VANTA — стример">
+  <meta property="og:description" content="Трансляции, клипы и сообщество.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#hero">К содержимому</a>
+
+  <div class="bg" aria-hidden="true">
+    <div class="bg__glow"></div>
+    <div class="bg__grid"></div>
+    <div class="bg__spot"></div>
+    <div class="bg__noise"></div>
+  </div>
+
+  <div class="page">
+    <header class="top">
+      <a class="brand" href="#hero" aria-label="На главную">
+        <svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true">
+          <defs><linearGradient id="bm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6F9BFF"/><stop offset="1" stop-color="#AA7CFF"/></linearGradient></defs>
+          <path d="M20 1 C22 13 27 18 39 20 C27 22 22 27 20 39 C18 27 13 22 1 20 C13 18 18 13 20 1Z" fill="url(#bm)"/>
+          <path d="M20 9 C21 16 24 19 31 20 C24 21 21 24 20 31 C19 24 16 21 9 20 C16 19 19 16 20 9Z" fill="#080A12" opacity=".55"/>
+        </svg>
+        <span class="brand__name" id="brandName"></span>
+      </a>
+      <nav class="menu" id="menu" aria-label="Разделы"></nav>
+      <ul class="icons" id="navSocials" aria-label="Социальные сети"></ul>
+    </header>
+
+    <main class="hero" id="hero">
+      <section class="copy">
+        <p class="tag mono" id="tag" role="status" aria-live="polite" hidden><i class="dot" aria-hidden="true"></i><span id="tagPlatform"></span><span class="tag__sep" id="tagSep" aria-hidden="true"></span><span id="tagCategory"></span></p>
+        <h1 class="nick"><span id="nick">VANTA</span></h1>
+        <p class="desc" id="desc"></p>
+        <div class="cta" id="cta"></div>
+      </section>
+
+      <div class="stage" id="stage" aria-hidden="true">
+        <div class="orb" id="orb">
+          <svg class="orbit" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <defs><linearGradient id="ob" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6F9BFF" stop-opacity="0"/><stop offset=".5" stop-color="#6F9BFF" stop-opacity=".7"/><stop offset="1" stop-color="#AA7CFF" stop-opacity=".1"/></linearGradient></defs>
+            <ellipse cx="100" cy="100" rx="122" ry="74" transform="rotate(-32 100 100)" fill="none" stroke="url(#ob)" stroke-width="1" vector-effect="non-scaling-stroke"/>
+          </svg>
+          <div class="orb__fb"></div>
+          <canvas id="orbCanvas"></canvas>
+          <i class="shard shard--a"></i>
+          <i class="shard shard--b"></i>
+          <i class="shard shard--c"></i>
+          <i class="bead bead--a"></i>
+          <i class="bead bead--b"></i>
+        </div>
+      </div>
+
+      <aside class="side mono" id="side" aria-hidden="true"></aside>
+    </main>
+
+    <div class="rule" aria-hidden="true"></div>
+
+    <section class="info" id="info" aria-label="Информация о канале">
+      <div class="blk blk--schedule" id="schedule" hidden></div>
+      <div class="blk blk--links" id="links" hidden></div>
+      <div class="blk blk--about" id="about" hidden></div>
+    </section>
+
+    <footer class="foot mono">
+      <span id="footLeft"></span>
+      <span id="footRight"></span>
+    </footer>
+  </div>
+
+  <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+    <div class="sheet__box">
+      <header class="sheet__head">
+        <h2 id="sheetTitle" class="sheet__title"></h2>
+        <button type="button" class="sheet__close" id="sheetClose" aria-label="Закрыть">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+        </button>
+      </header>
+      <div class="sheet__body" id="sheetBody"></div>
+    </div>
+  </dialog>
+
+  <script src="js/config.js"></script>
+  <script src="js/orb.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
+
